@@ -1,0 +1,37 @@
+<script type="text/ng-template" id="userForm.html">
+	<form name="insertUserForm" ng-submit="saveUser(user)">
+		<input type="text" ng-model="user.fname" placeholder="First Name"/>
+		<input type="text" ng-model="user.lname" placeholder="Last Name"/>
+		<input type="email" ng-model="user.email" placeholder="Email address"/>
+		<input type="hidden" ng-model="user.type" value="0" />
+		<button type="submit">Save</button>
+	</form>
+</script>
+
+<div class="usersDiv entityWrapper" ng-controller="userCtrl">
+<div>
+		<div><div ng-click="enableInsertUser()"><span ng-bind="insertUserText()"></span></div></div>
+		<div ng-show="showInsertUser()" ng-include="'userForm.html'">
+							
+		</div>
+	</div>
+	<ul class="userDiv">
+		<li  class="userLi" ng-repeat="user in users"  ng-show="showUser(user.id)">
+			<div>
+				<span class="userName"> {{user.fname}} {{user.lname}} </span>
+				<span class="userEmail"><a href="mailto: {{user.email}}">{{user.email}}</a></span>
+				<span class="userUpdate">
+					<div ng-click="enableEditUser(user)">
+						<span ng-bind="editUserText(user)"></span>
+					</div>
+					<div ng-show="showEditUser(user)" ng-include="'userForm.html'">
+						
+					</div>	
+				</span>
+				<span class="userDelete"><a href="#" ng-really-message="Deleting a member cannot be undone. Are you sure?" ng-really-click="deleteUser(user)" ng-really-click>Delete</a></span>
+			</div>
+ 			
+
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,7 @@
+<form name="insertUserForm" ng-submit="insertUser()">
+	<input type="text" ng-model="user.fname" placeholder="First Name"/>
+	<input type="text" ng-model="user.lname" placeholder="Last Name"/>
+	<input type="email" ng-model="user.email" placeholder="Email address"/>
+	<input type="hidden" ng-model="user.type" value="0" />
+	<button type="submit">Insert</button>
+</form>

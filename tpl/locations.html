@@ -1,0 +1,13 @@
+<div class="locationsDiv entityWrapper" ng-controller="locationCtrl">
+	<h1 class="entityTitle">Locations</h1>
+	<ul class="locationDiv">
+		<li ng-repeat="location in locations" class="locationLi">
+			<span> {{location.name}}</span>
+			<span> {{location.description}} </span>
+			<span> {{locatoin.code}} </span>
+			<span class="UpdateLink"><a href="/location/update/{{location.id}}">edit</a></span>
+			<button ng-click="delete(location)">Delete</button>
+		</li>
+	</ul>
+	<p>Add New</p>
+</div>
