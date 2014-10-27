@@ -15,7 +15,7 @@
 							
 		</div>
 	</div>
-	<ul class="userDiv">
+	<ol class="userDiv">
 		<li  class="userLi" ng-repeat="user in users"  ng-show="showUser(user.id)">
 			<div>
 				<span class="userName"> {{user.fname}} {{user.lname}} </span>
@@ -28,10 +28,10 @@
 						
 					</div>	
 				</span>
-				<span class="userDelete"><a href="#" ng-really-message="Deleting a member cannot be undone. Are you sure?" ng-really-click="deleteUser(user)" ng-really-click>Delete</a></span>
+				<span class="userDelete"><div ng-really-message="Deleting a member cannot be undone. Are you sure?" ng-really-click="deleteUser(user)" ng-really-click>Delete</div></span>
 			</div>
  			
 
 		</li>
-	</ul>
+	</ol>
 </div>

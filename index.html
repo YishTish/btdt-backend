@@ -1,32 +1,31 @@
-<!doctype html>
+	<!doctype html>
 <html ng-app="btdt">
 	<head>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/lodash/2.1.0/lodash.compat.min.js"></script>
 		<script src="js/btdt-web.js"></script>
+		<script src="js/directives.js"></script>
+		<script src="js/services.js"></script>
 		<script src="js/userController.js"></script>
 		<script src="js/locationController.js"></script>
+
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+		</head>
 <body>
+	<btdt-header></btdt-header>
 
-<a href="#/users">Users</a>
-<a href="#/locations">Locations</a>
-<div ng-view>
+	<div class="container" ng-view>
 
-</div>
-<!-- <div class="locationsDiv entityWrapper" ng-controller="locationCtrl">
-	<h1 class="entityTitle">Locations</h1>
-	<ul class="locationDiv">
-		<li ng-repeat="location in locations" class="locationLi">
-			<span> {{location.name}}</span>
-			<span> {{location.description}} </span>
-			<span> {{locatoin.code}} </span>
-			<span class="UpdateLink"><a href="/location/update/{{location.id}}">edit</a></span>
-			<button ng-click="delete(location)">Delete</button>
-		</li>
-	</ul>
-	<p>Add New</p>
-</div> -->
+	</div>
 </body>
 
 </html>

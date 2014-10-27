@@ -1,42 +1,48 @@
-app.controller("userCtrl", function($scope, btdtResource){
-	$scope.users = btdtResource.query();
-	
-	for(user in $scope.users){
-		user.editing = false;
-	}
-
+app.controller("userCtrl", function($scope, Restangular){
+		
 	insertingNewUser = false;
+	
+	$scope.users = Restangular.all('members').getList().$object;
+	for(user in $scope.users){
+			user.editing = false;
+	 	}
+	//setTimeout(function() {console.log($scope.users) }, 1000);
 
-	$scope.saveUser = function(user){
+	$scope.saveUser = function(data){
+
+		var user = _.clone(data);
+		data.fname = data.lname = data.email = '';
 		if(user.id > 0){
-			user.$update();
+			Restangular.one('member').customPUT(user).then(function(data){
+				user.editing = false;
+			});
 		}
 		else{
 			user.type="0";
-			btdtResource.save(user);
+			Restangular.one('member').customPOST(user).then(function(data){
+				user.editing = false;
+				user.id = data.id;
+				var listLength = $scope.users.length;
+				insertingNewUser = false;
+				$scope.users[listLength] = user;
+				$scope.user = {
+					firstname: null,
+					lastname: null,
+					email: null
+				};
+			});
 		}
-		$scope.users.$promise.then(function(result){
-			$scope.users = btdtResource.query();	
-		});
 	};
-
-	$scope.editUser = function(user){
-		user.$update();
-	};
-
-	$scope.insertUser = function(){
-		$scope.user.type = 0;
-		btdtResource.save($scope.user);
-		$scope.users.$promise.then(function(result){
-			$scope.users = btdtResource.query();	
-		});
-		
-		//user.$save();
-	};
-
 
 	$scope.deleteUser = function(user){
-		user.$delete();
+		Restangular.one('members').customDELETE(user.id).then(function(data){
+			console.log(data);
+			for(var i=0 ; i < $scope.users.length; i++){
+				if($scope.users[i].id == user.id){
+					$scope.users.splice(i,1);
+				}
+			}
+		});
 	};
 
 	$scope.showUser= function(userId){
@@ -46,11 +52,13 @@ app.controller("userCtrl", function($scope, btdtResource){
 	$scope.enableEditUser = function(user){
 		user.editing = !user.editing;
 	};
+
 	$scope.showEditUser=function (user){
 		if(user.editing == true)
 			return true;
 		else return false;
 	};
+
 	$scope.editUserText = function(user){
 		if(user.editing == true)
 			return "Hide";
@@ -66,11 +74,6 @@ app.controller("userCtrl", function($scope, btdtResource){
 		return insertingNewUser;
 	};
 	$scope.insertUserText = function(user){
-		if(insertingNewUser)
-			return "Hide";
-		else
-			return "Insert new";
+		return (insertingNewUser ? "Hide" : "Insert New");
 	}
-
-
 });

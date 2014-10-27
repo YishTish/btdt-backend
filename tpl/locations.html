@@ -1,13 +1,33 @@
+<script type="text/ng-template" id="locationForm.html">
+	<form name="insertLocationForm" ng-submit="saveLocation(location)"><br />
+		<input type="text" ng-model="location.name" placeholder="Name"/><br />
+		<input type="text" ng-model="location.description" placeholder="Description"/><br />
+		<input type="text" ng-model="location.longitude" placeholder="Longitue"/><br />
+		<input type="text" ng-model="location.latitude" placeholder="Latitude"/><br />
+		
+		<button type="submit">Save</button>
+	</form>
+</script>
+	
+
 <div class="locationsDiv entityWrapper" ng-controller="locationCtrl">
 	<h1 class="entityTitle">Locations</h1>
-	<ul class="locationDiv">
-		<li ng-repeat="location in locations" class="locationLi">
-			<span> {{location.name}}</span>
-			<span> {{location.description}} </span>
-			<span> {{locatoin.code}} </span>
-			<span class="UpdateLink"><a href="/location/update/{{location.id}}">edit</a></span>
-			<button ng-click="delete(location)">Delete</button>
-		</li>
-	</ul>
-	<p>Add New</p>
+	<div style="clear:both">	
+		<div style="float:left">
+		<!--<div>
+			<div ng-click="enableInsertLocation()">
+				<span ng-bind="insertLocationText()"></span>
+			</div>
+		</div>
+			<div ng-show="showInsertLocation()" ng-include="'locationForm.html'">
+			</div>
+-->
+			<location-list></location-list>
+		</div>
+		<div>
+			<location-details location="{{ indexPos }}" ng-hide="enableEditing()"></location-details>
+			<edit-location ng-show="enableEditing()"></edit-location>
+			<!--<div ng-show="true" ng-include="'locationForm.html'"> -->
+		</div>
+	</div> 
 </div>

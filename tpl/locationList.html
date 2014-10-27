@@ -1,0 +1,6 @@
+<div class="locationDiv">
+			<div ng-repeat="location in locations" ng-class="{'bg-danger':location.indexPos==getLocationPos(), 'bg-warning':location.indexPos!=getLocationPos()}" style="padding:10px;margin:5px" ng-click="updateCurrent(location)">
+				<h3>{{location.name}}</h3>
+				<div > {{location.description}}</div>
+			</div>
+</div>
